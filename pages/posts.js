@@ -1,10 +1,16 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { storePosts } from "../store/redux/action/index.js";
 import PostCard from "../components/PostCard.js";
 
 export default function posts({ posts, users, comments }) {
   // if (!posts) {
   //   return null;
   // }
+
+  const dispatch = useDispatch();
+
+  const oldPostsData = useSelector((state) => state.postsReducer);
 
   const postsList = posts?.map((post, index) => {
     // finding coresponding user info
@@ -20,10 +26,21 @@ export default function posts({ posts, users, comments }) {
     // finding number of comments
     const numComments = postComments.length;
 
-    console.log(user);
-    console.log(postComments);
-    console.log(numComments);
-    console.log("Hello");
+    // console.log(user);
+    // console.log(postComments);
+    // console.log(numComments);
+    // console.log("Hello");
+
+    const postData = {
+      postid: post.id,
+      username: user.name,
+      useremail: user.email,
+      title: post.title,
+      body: post.body,
+      comments: numComments,
+    };
+
+    dispatch(storePosts(oldPostsData.push(postData)));
 
     return (
       <div
@@ -43,9 +60,18 @@ export default function posts({ posts, users, comments }) {
       </div>
     );
   });
+
+  const handleClick = () => {
+    console.log(oldPostsData);
+    console.log("hello");
+  };
+
   return (
     <div>
       <div>Posts</div>
+      <button onClick={handleClick} className="border-2 border-black">
+        Click Me
+      </button>
       {postsList}
     </div>
   );
