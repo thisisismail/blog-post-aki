@@ -23,6 +23,7 @@ export default function posts({ posts, users, comments }) {
     console.log(user);
     console.log(postComments);
     console.log(numComments);
+    console.log("Hello");
 
     return (
       <div
