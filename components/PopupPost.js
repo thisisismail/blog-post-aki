@@ -70,7 +70,7 @@ export default function PopupPost(props) {
             <div className="font-semibold">Comments</div>
             <GoComment size={24} className="ml-3 w-full text-black -mb-2" />
           </div>
-          {commentsComponent}
+          <div className="overflow-y-auto h-40 md:h-min">{commentsComponent}</div>
         </CardFooter>
       </Card>
     </div>

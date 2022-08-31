@@ -42,7 +42,7 @@ export default function PostsList(props) {
     return (
       <div
         key={index}
-        style={{ width: 400 }}
+        style={{ width: 350 }}
         onClick={() => openPopup()}
         className="cursor-pointer pb-2"
       >
@@ -51,7 +51,7 @@ export default function PostsList(props) {
           userEmail={post.useremail}
           title={post.title}
           body={post.body}
-          comments={post.numComments}
+          comments={post.numcomments}
           key={index}
         />
       </div>
@@ -60,7 +60,7 @@ export default function PostsList(props) {
   return (
     <div>
       <div>{popup}</div>
-      <div className="pt-16 mx-auto border-0 w-min">{postsList}</div>
+      <div className="pt-16 mx-auto border-0 w-min px-2">{postsList}</div>
     </div>
   );
 }

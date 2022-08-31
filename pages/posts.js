@@ -24,6 +24,8 @@ export default function posts({ posts, users, comments }) {
       return comment.postId === post.id;
     });
 
+    console.log(postComments);
+
     // finding number of comments
     const numComments = postComments.length;
     // console.log(postComments);
