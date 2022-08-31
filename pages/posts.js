@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { storePosts } from "../store/redux/action/index.js";
+import { Button } from "@material-tailwind/react";
+import { GrClose } from "react-icons/gr";
 import PostCard from "../components/PostCard.js";
+import PopUpPost from "../components/PopupPost.js";
 
 export default function posts({ posts, users, comments }) {
-  // if (!posts) {
-  //   return null;
-  // }
+  const [popup, setPopup] = useState();
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,37 @@ export default function posts({ posts, users, comments }) {
     // finding number of comments
     const numComments = postComments.length;
 
+    console.log(postComments);
+
+    // close popup handler
+    const closePupup = () => {
+      console.log("close post pupup");
+      setPopup();
+    };
+
+    // open popup handler
+    const openPopup = () => {
+      console.log("open post popup");
+      setPopup(
+        <PopUpPost
+          postComments={postComments}
+          postUser={user.name}
+          postEmail={user.email}
+          postUserId={user.id}
+          postTitle={post.title}
+          postBody={post.body}
+          closeButton={
+            <Button
+              onClick={closePupup}
+              className="h-full bg-transparent shadow-none drop-shadow-none hover:drop-shadow-none hover:shadow-none"
+            >
+              <GrClose size={24} />
+            </Button>
+          }
+        />
+      );
+    };
+
     // console.log(user);
     // console.log(postComments);
     // console.log(numComments);
@@ -37,7 +69,8 @@ export default function posts({ posts, users, comments }) {
       useremail: user.email,
       title: post.title,
       body: post.body,
-      comments: numComments,
+      numcomments: numComments,
+      comments: postComments,
     };
 
     dispatch(storePosts(oldPostsData.push(postData)));
@@ -46,7 +79,7 @@ export default function posts({ posts, users, comments }) {
       <div
         key={index}
         style={{ width: 400 }}
-        // onClick={() => openPopUp(item.title, item.body)}
+        onClick={() => openPopup()}
         className="cursor-pointer pb-2"
       >
         <PostCard
@@ -68,6 +101,7 @@ export default function posts({ posts, users, comments }) {
 
   return (
     <div>
+      {popup}
       <div>Posts</div>
       <button onClick={handleClick} className="border-2 border-black">
         Click Me
