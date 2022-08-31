@@ -2,9 +2,9 @@ import React from "react";
 import PostCard from "../components/PostCard";
 
 export default function posts({ posts, users, comments }) {
-  if (!posts) {
-    return null;
-  }
+  // if (!posts) {
+  //   return null;
+  // }
 
   const postsList = posts?.map((post, index) => {
     // finding coresponding user info
