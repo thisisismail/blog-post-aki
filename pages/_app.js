@@ -7,9 +7,11 @@ const store = createStore(allReducers);
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <div className="bg-green-100">
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </div>
   );
 }
 
